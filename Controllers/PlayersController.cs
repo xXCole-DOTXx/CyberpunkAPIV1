@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CyberpunkAPI.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Cors;
 
 namespace CyberpunkAPI.Controllers
 {
@@ -40,11 +41,10 @@ namespace CyberpunkAPI.Controllers
         public async Task<ActionResult<IEnumerable<Player>>> GetPlayersAndStats()
         {
             return await _context.Players.Include(c => c.Stats).Include(c => c.SpecialAbilities).ToListAsync();
-            //return await _context.Players.FromSqlRaw("exec GetAllPlayersInfo").ToListAsync(); //Not working for some reason
         }
 
         // GET: api/Players/5
-       /* [HttpGet("{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Player>> GetPlayer(int id)
         {
             var player = await _context.Players.FindAsync(id);
@@ -55,10 +55,10 @@ namespace CyberpunkAPI.Controllers
             }
 
             return player;
-        } */
+        } 
 
         // GET: api/Players/5
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<Player>> GetPlayerInfo(int id)
         {
             var player = await _context.Players.FindAsync(id);
@@ -79,6 +79,7 @@ namespace CyberpunkAPI.Controllers
             return null;
 
         }
+        */
 
 
         // PUT: api/Players/5
